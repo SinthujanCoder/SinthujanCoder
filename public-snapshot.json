@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-10-01",
+  "primary_language_repo_counts": {
+    "JavaScript": 3,
+    "TypeScript": 1,
+    "PHP": 1
+  },
+  "repository_size_kb": {
+    "LMS": 12570,
+    "trinco-diving-center": 8852,
+    "Doctor-Appointment-system": 4834,
+    "prescripto-full-stack": 4802,
+    "biethday-site-v1-main": 1685
+  }
+}

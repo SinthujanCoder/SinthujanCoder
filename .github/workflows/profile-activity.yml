@@ -1,0 +1,33 @@
+name: Update profile activity
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - scripts/update_activity.py
+      - .github/workflows/profile-activity.yml
+permissions:
+  contents: write
+concurrency:
+  group: profile-activity
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch GitHub activity and render graphic
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PROFILE_USER: SinthujanCoder
+        run: python3 scripts/update_activity.py
+      - name: Save refreshed graphic
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/activity.svg
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Refresh profile activity"
+          git push
